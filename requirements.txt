@@ -1,2 +1,2 @@
-git+git://github.com/quintonweenink/mlpy@master
 pandas
+numpy

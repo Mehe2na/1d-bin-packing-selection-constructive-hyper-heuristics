@@ -1,11 +1,9 @@
-### Email Cyber Criminal Profiling
+### 1D bin-packing selection construction hyper-heuristics
 
 #### Getting Started:
 
 ##### Install dependencies:
 `sudo -H pip3 install -r requirements.txt`
 
-##### Running a simulation:
-
-1. Go to the directory of the file
-2. Run `python3 experiments/makecsv.py`
+##### Running the notebook:
+2. Run `jupyter notebook ./`
