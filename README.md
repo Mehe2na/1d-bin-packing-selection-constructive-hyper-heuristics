@@ -8,4 +8,4 @@ You can open the notebook online [here](https://github.com/quintonweenink/1d-bin
 `sudo -H pip3 install -r requirements.txt`
 
 ##### Running the notebook:
-2. Run `jupyter notebook ./`
+`jupyter notebook ./`
