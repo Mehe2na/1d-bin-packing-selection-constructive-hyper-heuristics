@@ -1,4 +1,6 @@
-def firstFit(result, item, capacity):
+import numpy as np
+
+def firstFit(result, item, capacity, prev):
     allocated = False
     for i, bin in enumerate(result):
         if bin + item <= capacity:
@@ -9,24 +11,54 @@ def firstFit(result, item, capacity):
     if not allocated:
         result.append(item)
 
-    return result
+    return result, prev
 
-
-def nextFit(result, item, capacity):
+def lastFit(result, item, capacity, prev):
     allocated = False
-    if len(result) > 0:
-        bin = result[len(result) - 1]
-        if bin + item <= capacity:
-            result[len(result) - 1] += item
+    for i in range(len(result) - 1, -1, -1):
+        if result[i] + item <= capacity:
+            result[i] += item
             allocated = True
+            break
 
     if not allocated:
         result.append(item)
 
-    return result
+    return result, prev
+
+def randomFit(result, item, capacity, prev):
+    allocated = False
+    randomList = np.arange(len(result))
+    np.random.shuffle(randomList)
+    for i in randomList:
+        if result[i] + item <= capacity:
+            result[i] += item
+            allocated = True
+            break
+
+    if not allocated:
+        result.append(item)
+
+    return result, prev
+
+def nextFit(result, item, capacity, prev):
+    allocated = False
+
+    for i in range(prev, len(result)):
+        bin = result[i]
+        prev = i
+        if bin + item <= capacity:
+            result[i] += item
+            allocated = True
+
+    if not allocated:
+        result.append(item)
+        prev = 0
+
+    return result, prev
 
 
-def bestFit(result, item, capacity):
+def bestFit(result, item, capacity, prev):
     best = float('inf')
     pos = None
     for i, bin in enumerate(result):
@@ -42,10 +74,10 @@ def bestFit(result, item, capacity):
     else:
         result[pos] += item
 
-    return result
+    return result, prev
 
 
-def worstFit(result, item, capacity):
+def worstFit(result, item, capacity, prev):
     worst = -1
     pos = None
     for i, bin in enumerate(result):
@@ -61,4 +93,4 @@ def worstFit(result, item, capacity):
     else:
         result[pos] += item
 
-    return result
+    return result, prev
